@@ -1,0 +1,6 @@
+<launch>
+    <node name="visual" pkg="visual" type="visual" output="screen">
+        <!-- <rosparam command="load" file="$(find control)/config/acceleration.yaml" /> Load parameters from config files -->
+    </node>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find visual)/rviz/t.rviz" required="true" />
+</launch>
