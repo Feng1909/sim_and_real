@@ -8,11 +8,8 @@ void odom_Callback(const nav_msgs::Odometry::ConstPtr &odom_msg)
 {
   nav_msgs::Odometry odom_msg1 = *odom_msg;
   odom.pose.pose = odom_msg1.pose.pose;
-  // std::cout << " [" << odom.pose.pose.orientation.w << ", " << odom.pose.pose.orientation.x << ", "
-  //           << odom.pose.pose.orientation.y << ", " << odom.pose.pose.orientation.z << "]" << std::endl
-  //           << std::endl;
-  state_x = odom.pose.pose.position.x;
-  state_y = odom.pose.pose.position.y;
+  state_x = odom.pose.pose.position.x + 7.74164;
+  state_y = odom.pose.pose.position.y - 1.89813;
   double state_z = odom.pose.pose.position.z;
   double w = odom.pose.pose.orientation.w;
   double x = odom.pose.pose.orientation.x;
@@ -70,9 +67,6 @@ void control(){
   geometry_msgs::Vector3 angular;
   angular.x=0;
   angular.y=0;
-  //直行
-  //angular.z=0;
-  //转圈
   angular.z=target_theta - state_theta;
   twist.linear=linear;
   twist.angular=angular;
@@ -86,13 +80,8 @@ int main(int argc, char **argv)
   ros::NodeHandle nodeHandle("~");
   ros::Rate loop_rate(10);
   load_path();
-  // tf_sub = nodeHandle.subscribe("/tf", 10, tf_callback);
-  // lidar_sub = nodeHandle.subscribe("/rplidar/scan", 10, lidar_callback);
   odom_sub = nodeHandle.subscribe("/ep/odom", 1, odom_Callback);
   cmd_pub = nodeHandle.advertise<geometry_msgs::Twist>("/cmd_position", 1);
-  // state_pub = nodeHandle.advertise<visualization_msgs::MarkerArray>("/state", 1);
-  // lidar_pub = nodeHandle.advertise<sensor_msgs::PointCloud2>("/lidar_after", 1);
-  // laser_pub = nodeHandle.advertise<sensor_msgs::LaserScan>("/laser", 1);
   while (ros::ok())
   {
     control();
