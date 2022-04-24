@@ -9,7 +9,7 @@ sudo apt install python-catkin-tools
 ```
 git clone https://github.com/Feng1909/sim_and_real.git
 cd ~/sim_and_real
-catkin build
+catkin_make
 ```
 ## 使用步骤
 * 实车跑动，并录制vive数据和车辆传感器数据
