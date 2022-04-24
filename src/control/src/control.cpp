@@ -38,6 +38,8 @@ void load_path() {
     cin>>t;
     tmp.pts.y = t;
     cin>>t;
+    tmp.pts.z = t;
+    cin>>t;
     Path_Global.push_back(tmp);
   }
   fclose(stdin);
@@ -45,7 +47,37 @@ void load_path() {
 }
 
 void control(){
-  
+  geometry_msgs::Point p;
+  p.x = state_x;
+  p.y = state_y;
+  p.z = state_theta;
+  last_point++;
+  int i;
+  for (i=min(int(Path_Global.size()), last_point+10); i>=last_point; i--) {
+    double dis = hypot(Path_Global[i].pts.x - p.x, Path_Global[i].pts.y - p.y);
+    if(dis <= 0.2)
+      break;
+  }
+  last_point = i;
+  double target_x = Path_Global[i].pts.x;
+  double target_y = Path_Global[i].pts.y;
+  double target_theta = Path_Global[i].pts.z;
+  geometry_msgs::Twist twist;
+  geometry_msgs::Vector3 linear;
+  linear.x=target_x - state_x;
+  linear.y=target_y - state_y;
+  linear.z=0;
+  geometry_msgs::Vector3 angular;
+  angular.x=0;
+  angular.y=0;
+  //直行
+  //angular.z=0;
+  //转圈
+  angular.z=target_theta - state_theta;
+  twist.linear=linear;
+  twist.angular=angular;
+
+  cmd_pub.publish(twist);
 }
 
 int main(int argc, char **argv)

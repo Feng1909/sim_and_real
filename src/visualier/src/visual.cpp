@@ -44,7 +44,7 @@ void tf_callback(tf2_msgs::TFMessage msgs){
       if (msgs.transforms[0].header.stamp <old) {
         freopen("path.txt", "w", stdout);
         for(int i=0; i<q.size(); i++){
-          cout<<q[i].pts.x<<" "<<q[i].pts.y<<endl;
+          cout<<q[i].pts.x<<" "<<q[i].pts.y<<" "<<q[i].pts.z<<endl;
         }
         cout<<-99999;
         fclose(stdout);
@@ -72,6 +72,7 @@ void tf_callback(tf2_msgs::TFMessage msgs){
       state_y = msgs.transforms[0].transform.translation.y;
       // cout<<asin(s.pts.x/hypot(s.pts.x, s.pts.y))<<" "<<msgs.transforms[0].transform.rotation.y<<endl;
       cout<<s.pts.x<<" "<<s.pts.y<< " "<<theta<<endl;
+      s.pts.z = theta;
       q.push_back(s);
     }
     visual();

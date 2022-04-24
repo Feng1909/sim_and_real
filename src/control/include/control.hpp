@@ -37,3 +37,4 @@ void control();
 nav_msgs::Odometry odom;
 Trajectory Path_Global;
 double state_x, state_y, state_theta;
+int last_point;
