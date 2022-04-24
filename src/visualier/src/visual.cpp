@@ -53,8 +53,8 @@ void tf_callback(tf2_msgs::TFMessage msgs){
       }
       old = msgs.transforms[0].header.stamp;
       TrajectoryPoint s;
-      s.pts.y = -msgs.transforms[0].transform.translation.x;
-      s.pts.x = -msgs.transforms[0].transform.translation.z + 4;
+      s.pts.x = -msgs.transforms[0].transform.translation.x + 4;
+      s.pts.y = msgs.transforms[0].transform.translation.z;
       // cout<<msgs.transforms[0].header.stamp<<endl;
       // cout<<msgs.transforms[0].transform.rotation.x<<endl
       //   <<msgs.transforms[0].transform.rotation.y<<endl

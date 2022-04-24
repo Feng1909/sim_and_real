@@ -140,6 +140,11 @@ Visualization Manager:
         line_80: true
         line_81: true
         line_82: true
+        line_83: true
+        line_84: true
+        line_85: true
+        line_86: true
+        line_87: true
         line_9: true
       Queue Size: 100
       Value: true
@@ -211,8 +216,8 @@ Visualization Manager:
       Scale: 65.7367935180664
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 4.378449440002441
-      Y: -1.4282993078231812
+      X: 3.2527456283569336
+      Y: -1.7629672288894653
     Saved: ~
 Window Geometry:
   Displays:
