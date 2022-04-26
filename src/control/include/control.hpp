@@ -24,17 +24,23 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <nav_msgs/Odometry.h>
+#include <sensor_msgs/Imu.h>
+// #include <windows.h>
 
 
 ros::Subscriber odom_sub;
+ros::Subscriber imu_sub;
 
 ros::Publisher cmd_pub;
 
 void odom_Callback(const nav_msgs::Odometry::ConstPtr& odom_msg);
 void load_path();
 void control();
+void imu_Callback(const sensor_msgs::Imu::ConstPtr& imu_msg);
 
 nav_msgs::Odometry odom;
 Trajectory Path_Global;
 double state_x, state_y, state_theta;
 int last_point;
+double state_theta_old;
+bool is_moving;
